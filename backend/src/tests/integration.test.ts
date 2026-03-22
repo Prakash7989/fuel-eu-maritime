@@ -6,7 +6,13 @@ const app = express();
 app.use(express.json());
 app.use('/', router);
 
+import { pool } from '../infrastructure/db/connection';
+
 describe('Integration Tests', () => {
+    afterAll(async () => {
+        await pool.end();
+    });
+
 
     // These tests hit the real database by default because the repositories in Router.ts are instantiated directly
     // Ideally we'd mock them or use a test DB. For this assignment, we will assume the seed database has what's needed.
