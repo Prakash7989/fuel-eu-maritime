@@ -8,6 +8,8 @@ vi.mock('lucide-react', () => ({
     BarChart3: () => <div data-testid="bar-chart-icon" />,
     History: () => <div data-testid="history-icon" />,
     Layers: () => <div data-testid="layers-icon" />,
+    Menu: () => <div data-testid="menu-icon" />,
+    X: () => <div data-testid="x-icon" />,
 }));
 
 describe('App Shell', () => {
