@@ -37,9 +37,10 @@ export class ComplianceService {
 
     async computeAdjustedCB(shipId: string, year: number) {
         // Return CB after bank applications
-        const snapshot = await this.complianceRepo.getSnapshot(shipId, year);
+        let snapshot = await this.complianceRepo.getSnapshot(shipId, year);
         if (!snapshot) {
-            throw new Error('No compliance snapshot found');
+            // Auto-compute baseline if missing
+            snapshot = await this.computeCB(shipId, year);
         }
 
         const banked = await this.bankingRepo.getTotalBanked(shipId);
