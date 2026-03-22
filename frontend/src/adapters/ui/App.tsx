@@ -1,32 +1,62 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { RoutesTab } from './pages/RoutesTab.tsx';
-import { CompareTab } from './pages/CompareTab.tsx';
-import { BankingTab } from './pages/BankingTab.tsx';
-import { PoolingTab } from './pages/PoolingTab.tsx';
-import { Ship } from 'lucide-react';
+import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
+import { RoutesTab } from './pages/RoutesTab';
+import { CompareTab } from './pages/CompareTab';
+import { BankingTab } from './pages/BankingTab';
+import { PoolingTab } from './pages/PoolingTab';
 import './index.css';
 
 export function App() {
-    // rescan
     return (
         <Router>
-            <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
-                <header className="bg-blue-900 text-white shadow-md">
-                    <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-                        <div className="flex items-center space-x-2">
-                            <Ship className="h-6 w-6 text-blue-300" />
-                            <h1 className="text-xl font-bold">FuelEU Maritime Dashboard</h1>
+            <div className="app-bg" style={{ minHeight: '100vh' }}>
+                {/* ── Header ── */}
+                <header className="header">
+                    <div className="header-inner">
+                        <div className="logo">
+                            <div className="logo-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2M2 20l8-16 4 8 2-4 4 12" />
+                                    <path d="M6 20l1-5" />
+                                    <path d="M18 20l-1-5" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div className="logo-title">FuelEU Maritime</div>
+                            </div>
+                            <span className="logo-badge">EU 2025</span>
                         </div>
-                        <nav className="flex space-x-6">
-                            <Link to="/" className="hover:text-blue-300 transition-colors">Routes</Link>
-                            <Link to="/compare" className="hover:text-blue-300 transition-colors">Compare</Link>
-                            <Link to="/banking" className="hover:text-blue-300 transition-colors">Banking</Link>
-                            <Link to="/pooling" className="hover:text-blue-300 transition-colors">Pooling</Link>
+
+                        <nav className="tab-nav" role="navigation" aria-label="Main navigation">
+                            <NavLink to="/" end className={({ isActive }) => `tab-btn ${isActive ? 'active' : ''}`}>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M3 3h18l-2 13H5L3 3z" /><path d="M8 21h8" /><path d="M12 17v4" />
+                                </svg>
+                                Routes
+                            </NavLink>
+                            <NavLink to="/compare" className={({ isActive }) => `tab-btn ${isActive ? 'active' : ''}`}>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M18 20V10" /><path d="M12 20V4" /><path d="M6 20v-6" />
+                                </svg>
+                                Compare
+                            </NavLink>
+                            <NavLink to="/banking" className={({ isActive }) => `tab-btn ${isActive ? 'active' : ''}`}>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" />
+                                </svg>
+                                Banking
+                            </NavLink>
+                            <NavLink to="/pooling" className={({ isActive }) => `tab-btn ${isActive ? 'active' : ''}`}>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <circle cx="12" cy="12" r="10" /><path d="M8 12h8" /><path d="M12 8v8" />
+                                </svg>
+                                Pooling
+                            </NavLink>
                         </nav>
                     </div>
                 </header>
 
-                <main className="max-w-7xl mx-auto px-4 py-8">
+                {/* ── Page Content ── */}
+                <main className="main-content">
                     <Routes>
                         <Route path="/" element={<RoutesTab />} />
                         <Route path="/compare" element={<CompareTab />} />

@@ -4,7 +4,7 @@ export class BankingService {
   constructor(
     private bankingRepo: IBankingRepository,
     private complianceRepo: IComplianceRepository
-  ) {}
+  ) { }
 
   async bankPositiveCB(shipId: string, year: number, amount: number) {
     if (amount <= 0) {
@@ -21,7 +21,7 @@ export class BankingService {
     await this.bankingRepo.saveBankEntry({
       ship_id: shipId,
       year,
-      amount_gco2eq: -amount // banking means removing from current surplus, or we just track banked amount.
+      amount_gco2eq: amount // bank positive amount to accrue surplus
     });
   }
 
@@ -29,7 +29,7 @@ export class BankingService {
     if (amount <= 0) {
       throw new Error('Apply amount must be positive');
     }
-    
+
     // total previously banked (will be negative relative to deficit, wait)
     // Actually, banked amount is positive, so when banking from surplus, we keep +amount.
     // Let's assume bank entry stores +amount when banking, and -amount when applying.
