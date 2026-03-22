@@ -1,0 +1,21 @@
+# Node backend
+node_modules/
+
+# Build
+dist
+build
+coverage
+
+# Env
+.env
+.env.*
+
+# TypeScript
+*.tsbuildinfo
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
